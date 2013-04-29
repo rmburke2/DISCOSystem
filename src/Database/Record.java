@@ -23,9 +23,13 @@ public class Record {
     private java.awt.Color border3;
     private java.awt.Color border4;
     private java.awt.Image image1;
+    private String image1path;
     private java.awt.Image image2;
+    private String image2path;
     private java.awt.Image image3;
+    private String image3path;
     private java.awt.Image image4;
+    private String image4path;
     private String comments;
     
     public int getID() {
@@ -170,5 +174,37 @@ public class Record {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getImage4path() {
+        return image4path;
+    }
+
+    public void setImage4path(String image4path) {
+        this.image4path = image4path;
+    }
+
+    public String getImage3path() {
+        return image3path;
+    }
+
+    public void setImage3path(String image3path) {
+        this.image3path = image3path;
+    }
+
+    public String getImage2path() {
+        return image2path;
+    }
+
+    public void setImage2path(String image2path) {
+        this.image2path = image2path;
+    }
+
+    public String getImage1path() {
+        return image1path;
+    }
+
+    public void setImage1path(String image1path) {
+        this.image1path = image1path;
     }
 }

@@ -1,0 +1,47 @@
+public String LESSON_TABLE_NAME = "lessonTable";
+public String RECORD_TABLE_NAME = "recordTable";
+
+//Table column names
+public String ID = "id";
+public String NAME = "name";
+public String LESSON_NAME = "lessonName";
+public String CORRECT_CHOICE = "correctChoice";
+public String ACTUAL_CHOICE = "actualChoice";
+public String REWARD = "reward";
+public String AUDIO_REWARD = "audioReward";
+public String VIDEO_REWARD = "videoReward";
+public String RESPONSE_TIME = "responseTime";
+public String IMAGE_ONE_PATH = "imageOnePath";
+public String IMAGE_TWO_PATH = "imageTwoPath";
+public String IMAGE_THREE_PATH = "imageThreePath";
+public String IMAGE_FOUR_PATH = "imageFourPath";
+public String COMMENTS = "comments";
+
+//SQL Statements
+public static final String RECORD_DATABASE_CREATE =
+  "CREATE TABLE IF NOT EXISTS " + RECORD_TABLE_NAME + " ("
+  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT, "
+  + LESSON_NAME + " TEXT, " + CORRECT_CHOICE + " INTEGER, " +
+  ACTUAL_CHOICE + " INTEGER, " + REWARD + " INTEGER, " +
+  AUDIO_REWARD + " TEXT, " + VIDEO_REWARD + " TEXT, " +
+  RESPONSE_TIME + " INTEGER, " + IMAGE_ONE_PATH + " TEXT, " +
+  IMAGE_TWO_PATH + " TEXT, " + IMAGE_THREE_PATH + " TEXT, " +
+  IMAGE_FOUR_PATH + " TEXT, " + COMMENTS + " TEXT);";
+
+public static final String LESSON_TABLE_CREATE = 
+  "CREATE TABLE IF NOT EXISTS " + LESSON_TABLE_NAME + " ("
+  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT, "
+  + LESSON_NAME + " TEXT, " + CORRECT_CHOICE + " INTEGER, " +
+  REWARD + " INTEGER, " + AUDIO_REWARD + " TEXT, " + VIDEO_REWARD +
+  " TEXT, " + IMAGE_ONE_PATH + " TEXT, " + IMAGE_TWO_PATH + " TEXT, " +
+  IMAGE_THREE_PATH + " TEXT, " + IMAGE_FOUR_PATH + " TEXT, " + COMMENTS +
+  " TEXT);";
+
+public DatabaseHelper() {
+
+}
+
+public createDatabase(SQLiteDatabase db) {
+  db.execSQL(RECORD_DATABASE_CREATE);
+  db.execSQL(LESSON_TABLE_CREATE);
+}

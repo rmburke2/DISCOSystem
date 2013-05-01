@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public class Record {
     
+    public Record(){}
+    
     private int ID; //should be unique
     private String name;
     private Date date = new Date();

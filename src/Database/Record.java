@@ -10,7 +10,7 @@ public class Record {
     
     public Record(){}
     
-    private int ID; //should be unique
+    //private int ID; not needed anymore, taken care of in database
     private String name;
     private Date date = new Date();
     private String lessonName;
@@ -34,13 +34,13 @@ public class Record {
     private String image4path;
     private String comments;
     
-    public int getID() {
+    /*public int getID() {
         return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
-    }
+    }*/
 
     public String getName() {
         return name;

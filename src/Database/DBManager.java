@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.sql.ResultSetMetaData;
 import java.sql.DatabaseMetaData;
 import Database.Record;
+import Database.DBHelper;
  /**
  * @author Rich
  */
@@ -17,7 +18,7 @@ private  String sDriver = "org.sqlite.JDBC";
 private  String sUrl = "jdbc:sqlite:DISCO_DB.db";
 private  int iTimeout = 30;
 private  Connection conn = null;
-private  PreparedStatement insertStatement = null;
+private  PreparedStatement prepStatement = null;
 private Statement statement;
  
 public DBManager() throws Exception
@@ -84,46 +85,93 @@ public Record getLesson(String data, int field) throws SQLException{
     //@TODO SQL statements to pull the data from the database and populate record
     //@TODO load the image from image path into record
     Record record = new Record();
-    ResultSet results = statement.executeQuery("select * from records where " + data + " = n;");
-    results.getString(data); //this accesses the data in that field
+    ResultSet results = statement.executeQuery("select * from lessonTable where " + data + " = n;");
+    record.setName(results.getString(DBHelper.NAME)); 
+    record.setLessonName(results.getString(DBHelper.LESSON_NAME));
+    record.setCorrectChoice(results.getInt(DBHelper.CORRECT_CHOICE));
+    record.setReward(results.getInt(DBHelper.REWARD));
+    record.setAudioReward(results.getString(DBHelper.AUDIO_REWARD));
+    record.setVideoReward(results.getString(DBHelper.VIDEO_REWARD));
+    record.setImage1path(results.getString(DBHelper.IMAGE_ONE_PATH));
+    record.setImage2path(results.getString(DBHelper.IMAGE_TWO_PATH));
+    record.setImage3path(results.getString(DBHelper.IMAGE_THREE_PATH));
+    record.setImage4path(results.getString(DBHelper.IMAGE_FOUR_PATH));
+    record.setComments(results.getString(DBHelper.COMMENTS));
     return record;
 }
 
 //this method inserts an incomplete record into the database for future use
 public void insertLesson(Record record) throws SQLException{
-    insertStatement = conn.prepareStatement("insert into lessons values (?);");
-    int i; String s;
-    i = record.getID();
-    insertStatement.setInt(1, i); 
-    /*call an insert for every lesson field in record.  to save disk space, images are
-    saved by their image path instead of the image itself.  same for video and audio
-    use setInt(spot in row, data to insert) to do it.  use setString for strings*/
-    insertStatement.executeUpdate(); //updates the DB
+    prepStatement = conn.prepareStatement("insert into lessonTable values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+    int i, i2; String s1, s2, s3, s4, s5, s6, s7, s8, s9;
+    s1 = record.getName();
+    prepStatement.setString(2, s1);
+    s2 = record.getLessonName();
+    prepStatement.setString(3, s2);
+    i = record.getCorrectChoice();
+    prepStatement.setInt(4, i);
+    i2 = record.getReward();
+    prepStatement.setInt(5, i2);
+    s3 = record.getAudioReward();
+    prepStatement.setString(6, s3);
+    s4 = record.getVideoReward();
+    prepStatement.setString(7, s4);
+    s5 = record.getImage1path();
+    prepStatement.setString(8, s5);
+    s6 = record.getImage2path();
+    prepStatement.setString(9, s6);
+    s7 = record.getImage3path();
+    prepStatement.setString(10, s7);
+    s8 = record.getImage4path();
+    prepStatement.setString(11, s8);
+    s9 = record.getComments();
+    prepStatement.setString(12, s9);
+
+    prepStatement.executeUpdate(); //updates the DB
 }
 
 //this method saves a completed record to the database
 public void insertRecord(Record record) throws SQLException{
-    insertStatement = conn.prepareStatement("insert into records values (?);");
-    int i; String s;
-    i = record.getID();
-    insertStatement.setInt(1, i); 
-    /*call an insert for every field in record.  to save disk space, images are
-    saved by their image path instead of the image itself.  same for video and audio
-    use setInt(spot in row, data to insert) to do it.  use setString for strings*/
-    insertStatement.executeUpdate(); //updates the DB
+    prepStatement = conn.prepareStatement("insert into lessonTable values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+    int i, i2, i3, i4; String s1, s2, s3, s4, s5, s6, s7, s8, s9;
+    s1 = record.getName();
+    prepStatement.setString(2, s1);
+    s2 = record.getLessonName();
+    prepStatement.setString(3, s2);
+    i = record.getCorrectChoice();
+    prepStatement.setInt(4, i);
+    i2 = record.getReward();
+    prepStatement.setInt(5, i2);
+    s3 = record.getAudioReward();
+    prepStatement.setString(6, s3);
+    s4 = record.getVideoReward();
+    prepStatement.setString(7, s4);
+    s5 = record.getImage1path();
+    prepStatement.setString(8, s5);
+    s6 = record.getImage2path();
+    prepStatement.setString(9, s6);
+    s7 = record.getImage3path();
+    prepStatement.setString(10, s7);
+    s8 = record.getImage4path();
+    prepStatement.setString(11, s8);
+    s9 = record.getComments();
+    prepStatement.setString(12, s9);
+    i3 = record.getResponseTime();
+    prepStatement.setInt(13, i3);
+    i4 = record.getActualChoice();
+    prepStatement.setInt(14, i4);
+
+    prepStatement.executeUpdate(); //updates the DB
 }
 
 private void checkRecordTableExistence() throws SQLException {
-    //@TODO SQL statements to make the Record table, with only some of the fields from Record
-    String makeTable = "SQL statement to make the 'records' table. should check if the table exists first)";
+    String makeTable = DBHelper.RECORD_TABLE_CREATE;
     PreparedStatement ps = conn.prepareStatement(makeTable);
     ps.executeUpdate();
     }
 
 private void checkLessonTableExistence() throws SQLException {
-    //@TODO SQL statements to make the Lesson table, which stores only the fields
-    //needed to bring a lesson up to be completed.  For storing lessons for future use
-    String makeTable = "SQL statement to make the 'records' table. should check if the table exists first)";
+    String makeTable = DBHelper.LESSON_TABLE_CREATE;
     PreparedStatement ps = conn.prepareStatement(makeTable);
     ps.executeUpdate();
 }

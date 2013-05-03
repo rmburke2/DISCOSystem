@@ -24,20 +24,20 @@ public static final String COMMENTS = "comments";
 //SQL Statements
 public static final String RECORD_TABLE_CREATE =
   "CREATE TABLE IF NOT EXISTS " + RECORD_TABLE_NAME + " ("
-  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT, "
-  + LESSON_NAME + " TEXT, " + CORRECT_CHOICE + " INTEGER, "  + REWARD + " INTEGER, " +
-  AUDIO_REWARD + " TEXT, " + VIDEO_REWARD + " TEXT, " + IMAGE_ONE_PATH + " TEXT, " +
-  IMAGE_TWO_PATH + " TEXT, " + IMAGE_THREE_PATH + " TEXT, " +
-  IMAGE_FOUR_PATH + " TEXT, " + COMMENTS + " TEXT, " + RESPONSE_TIME + " INTEGER," + ACTUAL_CHOICE + " INTEGER);";
+  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " , "
+  + LESSON_NAME + " , " + CORRECT_CHOICE + " , "  + REWARD + " , " +
+  AUDIO_REWARD + " , " + VIDEO_REWARD + " , " + IMAGE_ONE_PATH + " , " +
+  IMAGE_TWO_PATH + " , " + IMAGE_THREE_PATH + " , " +
+  IMAGE_FOUR_PATH + " , " + COMMENTS + " , " + RESPONSE_TIME + " ," + ACTUAL_CHOICE + " );";
 
 public static final String LESSON_TABLE_CREATE = 
   "CREATE TABLE IF NOT EXISTS " + LESSON_TABLE_NAME + " ("
-  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT, "
-  + LESSON_NAME + " TEXT, " + CORRECT_CHOICE + " INTEGER, " +
-  REWARD + " INTEGER, " + AUDIO_REWARD + " TEXT, " + VIDEO_REWARD +
-  " TEXT, " + IMAGE_ONE_PATH + " TEXT, " + IMAGE_TWO_PATH + " TEXT, " +
-  IMAGE_THREE_PATH + " TEXT, " + IMAGE_FOUR_PATH + " TEXT, " + COMMENTS +
-  " TEXT);";
+  + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " , "
+  + LESSON_NAME + " UNIQUE, " + CORRECT_CHOICE + " , " +
+  REWARD + " , " + AUDIO_REWARD + " , " + VIDEO_REWARD +
+  " , " + IMAGE_ONE_PATH + " , " + IMAGE_TWO_PATH + " , " +
+  IMAGE_THREE_PATH + " , " + IMAGE_FOUR_PATH + " , " + COMMENTS +
+  " );";
 
 public DBHelper() {
 

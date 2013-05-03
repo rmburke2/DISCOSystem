@@ -11,28 +11,28 @@ public class Record {
     public Record(){}
     
     //private int ID; not needed anymore, taken care of in database
-    private String name;
+    private String name = "";
     private Date date = new Date();
-    private String lessonName;
-    private int correctChoice;
-    private int actualChoice;
-    private int reward;
-    private String audioReward;
-    private String videoReward;
-    private int responseTime;
+    private String lessonName = "";
+    private int correctChoice = 0;
+    private int actualChoice = 0;
+    private int reward = 0;
+    private String audioReward  = "";
+    private String videoReward  = "";
+    private int responseTime = 0;
     private java.awt.Color border1;
     private java.awt.Color border2;
     private java.awt.Color border3;
     private java.awt.Color border4;
     private java.awt.Image image1;
-    private String image1path;
+    private String image1path  = "";
     private java.awt.Image image2;
-    private String image2path;
+    private String image2path  = "";
     private java.awt.Image image3;
-    private String image3path;
+    private String image3path  = "";
     private java.awt.Image image4;
-    private String image4path;
-    private String comments;
+    private String image4path  = "";
+    private String comments  = "";
     
     /*public int getID() {
         return ID;
